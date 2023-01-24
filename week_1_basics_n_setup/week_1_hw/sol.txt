@@ -1,0 +1,31 @@
+1) --iidfile string
+2) 3
+3)
+20530
+SELECT count(*)
+	FROM green_trip_data
+	WHERE lpep_pickup_datetime >= '2019-01-15' AND lpep_dropoff_datetime < '2019-01-16';
+4)
+15:01:2019
+SELECT TO_CHAR(lpep_pickup_datetime, 'dd:mm:yyyy') FROM green_trip_data
+	WHERE (SELECT MAX(trip_distance) from green_trip_data) = trip_distance;
+
+5)
+2: 1282, 3: 254
+SELECT passenger_count, COUNT(*)
+	FROM green_trip_data
+	WHERE lpep_pickup_datetime >= '2019-01-01' AND lpep_pickup_datetime < '2019-01-02'
+	GROUP BY passenger_count
+	HAVING passenger_count = 2 OR passenger_count = 3;
+
+6)
+Long Island City/Queens Plaza
+SELECT
+		MAX(tip_amount) AS mx_tip,
+		(SELECT inner_tzl."Zone" FROM taxi_zone_lookup AS inner_tzl WHERE "DOLocationID" = inner_tzl."LocationID")
+	FROM (green_trip_data LEFT JOIN taxi_zone_lookup
+	ON taxi_zone_lookup."LocationID" = green_trip_data."PULocationID")
+	WHERE "Zone" = 'Astoria'
+	GROUP BY "DOLocationID"
+	ORDER BY mx_tip DESC
+	LIMIT 1;
