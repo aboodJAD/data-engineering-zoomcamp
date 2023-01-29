@@ -1,0 +1,93 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+   [32m+ [0m create
+ [0m
+Terraform will perform the following actions:
+
+ [1m  # google_bigquery_dataset.dataset [0m will be created [0m [0m
+ [0m   [32m+ [0m [0m resource "google_bigquery_dataset" "dataset" {
+       [32m+ [0m  [0m [1m [0mcreation_time [0m [0m              = (known after apply)
+       [32m+ [0m  [0m [1m [0mdataset_id [0m [0m                 = "trips_data_all"
+       [32m+ [0m  [0m [1m [0mdelete_contents_on_destroy [0m [0m = false
+       [32m+ [0m  [0m [1m [0metag [0m [0m                       = (known after apply)
+       [32m+ [0m  [0m [1m [0mid [0m [0m                         = (known after apply)
+       [32m+ [0m  [0m [1m [0mlabels [0m [0m                     = (known after apply)
+       [32m+ [0m  [0m [1m [0mlast_modified_time [0m [0m         = (known after apply)
+       [32m+ [0m  [0m [1m [0mlocation [0m [0m                   = "europe-west8"
+       [32m+ [0m  [0m [1m [0mproject [0m [0m                    = "agile-polymer-376104"
+       [32m+ [0m  [0m [1m [0mself_link [0m [0m                  = (known after apply)
+
+       [32m+ [0m  [0maccess {
+           [32m+ [0m  [0m [1m [0mdomain [0m [0m         = (known after apply)
+           [32m+ [0m  [0m [1m [0mgroup_by_email [0m [0m = (known after apply)
+           [32m+ [0m  [0m [1m [0mrole [0m [0m           = (known after apply)
+           [32m+ [0m  [0m [1m [0mspecial_group [0m [0m  = (known after apply)
+           [32m+ [0m  [0m [1m [0muser_by_email [0m [0m  = (known after apply)
+
+           [32m+ [0m  [0mdataset {
+               [32m+ [0m  [0m [1m [0mtarget_types [0m [0m = (known after apply)
+
+               [32m+ [0m  [0mdataset {
+                   [32m+ [0m  [0m [1m [0mdataset_id [0m [0m = (known after apply)
+                   [32m+ [0m  [0m [1m [0mproject_id [0m [0m = (known after apply)
+                }
+            }
+
+           [32m+ [0m  [0mroutine {
+               [32m+ [0m  [0m [1m [0mdataset_id [0m [0m = (known after apply)
+               [32m+ [0m  [0m [1m [0mproject_id [0m [0m = (known after apply)
+               [32m+ [0m  [0m [1m [0mroutine_id [0m [0m = (known after apply)
+            }
+
+           [32m+ [0m  [0mview {
+               [32m+ [0m  [0m [1m [0mdataset_id [0m [0m = (known after apply)
+               [32m+ [0m  [0m [1m [0mproject_id [0m [0m = (known after apply)
+               [32m+ [0m  [0m [1m [0mtable_id [0m [0m   = (known after apply)
+            }
+        }
+    }
+
+ [1m  # google_storage_bucket.data-lake-bucket [0m will be created [0m [0m
+ [0m   [32m+ [0m [0m resource "google_storage_bucket" "data-lake-bucket" {
+       [32m+ [0m  [0m [1m [0mforce_destroy [0m [0m               = true
+       [32m+ [0m  [0m [1m [0mid [0m [0m                          = (known after apply)
+       [32m+ [0m  [0m [1m [0mlocation [0m [0m                    = "EUROPE-WEST8"
+       [32m+ [0m  [0m [1m [0mname [0m [0m                        = "dtc_data_lake_agile-polymer-376104"
+       [32m+ [0m  [0m [1m [0mproject [0m [0m                     = (known after apply)
+       [32m+ [0m  [0m [1m [0mpublic_access_prevention [0m [0m    = (known after apply)
+       [32m+ [0m  [0m [1m [0mself_link [0m [0m                   = (known after apply)
+       [32m+ [0m  [0m [1m [0mstorage_class [0m [0m               = "STANDARD"
+       [32m+ [0m  [0m [1m [0muniform_bucket_level_access [0m [0m = true
+       [32m+ [0m  [0m [1m [0murl [0m [0m                         = (known after apply)
+
+       [32m+ [0m  [0mlifecycle_rule {
+           [32m+ [0m  [0maction {
+               [32m+ [0m  [0m [1m [0mtype [0m [0m = "Delete"
+            }
+
+           [32m+ [0m  [0mcondition {
+               [32m+ [0m  [0m [1m [0mage [0m [0m                   = 30
+               [32m+ [0m  [0m [1m [0mmatches_prefix [0m [0m        = []
+               [32m+ [0m  [0m [1m [0mmatches_storage_class [0m [0m = []
+               [32m+ [0m  [0m [1m [0mmatches_suffix [0m [0m        = []
+               [32m+ [0m  [0m [1m [0mwith_state [0m [0m            = (known after apply)
+            }
+        }
+
+       [32m+ [0m  [0mversioning {
+           [32m+ [0m  [0m [1m [0menabled [0m [0m = true
+        }
+
+       [32m+ [0m  [0mwebsite {
+           [32m+ [0m  [0m [1m [0mmain_page_suffix [0m [0m = (known after apply)
+           [32m+ [0m  [0m [1m [0mnot_found_page [0m [0m   = (known after apply)
+        }
+    }
+
+ [0m [1mPlan: [0m 2 to add, 0 to change, 0 to destroy.
+ [0m [90m
+───────────────────────────────────────────────────────────────────────────── [0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
