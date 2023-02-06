@@ -5,14 +5,11 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect.tasks import task_input_hash
 from datetime import timedelta
 
-# from google.cloud import storage
-# storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024* 1024  # 5 MB
-# storage.blob._MAX_MULTIPART_SIZE = 5 * 1024* 1024  # 5 MB
 
 @task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def fetch(dataset_url: str) -> pd.DataFrame:
     """Read taxi data from web into pandas DataFrame"""
-    df = pd.read_csv(dataset_url, verbose=True)
+    df = pd.read_csv(dataset_url)
     return df
 
 
@@ -45,11 +42,8 @@ def write_gcs(path: Path) -> None:
 
 
 @flow()
-def etl_web_to_gcs() -> None:
+def etl_web_to_gcs(color: str, year:int, month:int) -> None:
     """The main ETL function"""
-    color = "green"
-    year = 2020
-    month = 1
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
@@ -60,4 +54,7 @@ def etl_web_to_gcs() -> None:
 
 
 if __name__ == "__main__":
+    color = "green"
+    year = 2020
+    month = 1
     etl_web_to_gcs()
