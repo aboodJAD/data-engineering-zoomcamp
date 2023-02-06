@@ -1,0 +1,9 @@
+prefect cloud login
+prefect deployment build
+    week_2_workflow_orchestration/hw/etl_web_to_gcs.py:etl_web_to_gcs
+    --storage-block github/git-flow-code \
+    -n 'git-web-gcs'
+prefect block register -m prefect_github
+prefect block register -m prefect_gcp
+prefect deployment apply etl_web_to_gcs-deployment.yaml
+prefect agent start --work-queue "default"
